@@ -24,6 +24,8 @@ public:
         ss_<<v;
         std::cout<<" so far: "<<ss_.str ()<<std::endl;
     }
+
+    const std::string asString () {return ss_.str ();};
 protected:
     std::stringstream ss_;
 };

@@ -15,13 +15,12 @@ public:
         return logger;
     }
     LogStream& log ()
-    /*{
+    {
         thread_local LogStream logStream;
-        logStream.test_=3;
         return logStream;
-    }*/;
+    };
 protected:
-    Logger () {};
+    Logger ();
 };
 
 

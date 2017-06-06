@@ -12,7 +12,7 @@ class LogLine;
 
 class LogPolicy {
 public:
-    void log (std::unique_ptr<LogLine>& logLine);
+    virtual void log (std::unique_ptr<LogLine>& logLine)=0;
 };
 
 
