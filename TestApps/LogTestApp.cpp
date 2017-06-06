@@ -18,7 +18,7 @@ int runningFromAnotherThread ()
 int main ()
 {
     auto& test=Logger::Instance().log ();
-    test<<"Hi"<<LogStream::endl;
+    test<<"Hi2"<<LogStream::endl;
     test<<"Hello World "<<123.4<<" see ya"<<LogStream::endl;
 
     std::thread t (runningFromAnotherThread);
