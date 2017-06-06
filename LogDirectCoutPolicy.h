@@ -7,7 +7,7 @@
 
 #include "LogPolicy.h"
 
-class LogCoutPolicy: public LogPolicy {
+class LogDirectCoutPolicy: public LogPolicy {
 public:
     void log (std::unique_ptr<LogLine>& logLine) override;
 

@@ -3,3 +3,7 @@
 //
 
 #include "LogLine.h"
+
+void LogLine::reset() {
+    ss_.str ("");
+}

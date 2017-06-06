@@ -10,7 +10,7 @@ int runningFromAnotherThread ()
     auto& test2=Logger::Instance().log ();
     test2<<"From another thread";
     std::this_thread::sleep_for (std::chrono::seconds (2));
-    Logger::Instance().log ()<<" after the pause";
+    Logger::Instance().log ()<<" after the pause"<<LogStream::endl;
 };
 
 

@@ -3,14 +3,14 @@
 //
 
 #include "Logger.h"
-#include "LogCoutPolicy.h"
+#include "LogDirectCoutPolicy.h"
 
 //static
 //LogStream Logger::logStream_;
 
 Logger::Logger ()
 {
-    LogStream::logPolicy_=new LogCoutPolicy;
+    LogStream::logPolicy_=new LogDirectCoutPolicy;
 }
 
 /*
