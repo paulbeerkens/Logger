@@ -3,7 +3,7 @@ project(libLog)
 
 set(CMAKE_CXX_STANDARD 14)
 
-set(SOURCE_FILES Logger.cpp Logger.h LogStream.cpp LogStream.h LogLine.cpp LogLine.h LogPolicy.cpp LogPolicy.h LogDirectCoutPolicy.cpp LogDirectCoutPolicy.h)
+set(SOURCE_FILES Logger.cpp Logger.h LogStream.cpp LogStream.h LogLine.cpp LogLine.h LogPolicy.cpp LogPolicy.h LogDirectCoutPolicy.cpp LogDirectCoutPolicy.h LogSeverity.h LogSeverity.cpp)
 add_library(libLog ${SOURCE_FILES})
 
 

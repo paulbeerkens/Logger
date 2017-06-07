@@ -8,32 +8,45 @@
 #include <sstream>
 #include <iostream>
 #include <assert.h>
+#include "LogSeverity.h"
+#include <chrono>
+#include <iomanip> //for std::put_time
+#include <string>
 
 class LogLine {
 public:
-    LogLine ()
-    {
-        std::cout<<"Log line created"<<std::endl;
-    }
     ~LogLine ()
     {
-        std::cout<<"Log line destroyed"<<std::endl;
         assert (ss_.str ().empty()); //this means that we did not use <<LogStream::endl in this thread
     }
 
     template <typename T> void operator << (T&v)
     {
         ss_<<v;
-        //std::cout<<" so far: "<<ss_.str ()<<std::endl;
     }
 
-    const std::string asString () {return ss_.str ();};
+    std::string asString() const;
 
     void reset ();
 
+    void setSeverityAndTimeIfRequired(LogSeverity s) {
+        currentSeverity_ = s;
+        if (!timeSet_) {
+            timeStamp_ = std::chrono::system_clock::now();
+        }
+    };
+
+
+    void setTid(long tid) {
+        tid_ = tid;
+    }
+
 protected:
-    //TODO add time and log level
+    bool timeSet_ = false;
     std::stringstream ss_;
+    LogSeverity currentSeverity_ = LogSeverity::NotSet;
+    std::chrono::system_clock::time_point timeStamp_;
+    long tid_ = -1; //thread id
 };
 
 

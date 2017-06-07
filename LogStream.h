@@ -10,14 +10,19 @@
 #include <memory>
 #include "LogLine.h"
 #include "LogPolicy.h"
+#include "LogSeverity.h"
+#include <sys/syscall.h>
+#include <unistd.h>
 
 class LogStream {
 public:
     enum Control {endl=0};
 
+
     LogStream ()
     {
-        std::cout<<"Created LogStream"<<this<<" from :"<<std::this_thread::get_id()<<std::endl;
+        //std::cout<<"Created LogStream"<<this<<" from :"<<std::this_thread::get_id()<<std::endl;
+        tid_ = syscall(SYS_gettid);
     };
     ~LogStream ()
     {
@@ -30,9 +35,15 @@ public:
         return *this;
     };
 
-    std::unique_ptr <LogLine> getLogLine ()
-    {
-        return std::make_unique <LogLine> ();
+    void setSeverityAndTimeIfRequired(LogSeverity s) {
+        if (logLine_ == nullptr) logLine_ = getLogLine();
+        logLine_->setSeverityAndTimeIfRequired(s);
+    }
+
+    std::unique_ptr<LogLine> getLogLine() {//create a memory pool if this function is called a lot
+        std::unique_ptr<LogLine> logLine = std::make_unique<LogLine>();
+        logLine->setTid(tid_);
+        return logLine;
     }
 
 
@@ -44,6 +55,8 @@ public:
     static LogPolicy* logPolicy_;
 protected:
     std::unique_ptr <LogLine> logLine_=nullptr; //unique_ptr is very slow. Should change to raw pointer if speed increase is required
+    long tid_; //thread id
+
 
 
 };

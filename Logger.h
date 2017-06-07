@@ -6,17 +6,22 @@
 #define LIBLOG_LOGGER_H
 
 #include "LogStream.h"
+#include "LogSeverity.h"
 
 class Logger {
 public:
+
+
     static Logger& Instance ()
     {
         static Logger logger;
         return logger;
     }
-    LogStream& log ()
+
+    LogStream &logInfo()
     {
         thread_local LogStream logStream;
+        logStream.setSeverityAndTimeIfRequired(LogSeverity::Info);
         return logStream;
     };
 protected:
