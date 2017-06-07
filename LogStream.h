@@ -24,10 +24,7 @@ public:
         //std::cout<<"Created LogStream"<<this<<" from :"<<std::this_thread::get_id()<<std::endl;
         tid_ = syscall(SYS_gettid);
     };
-    ~LogStream ()
-    {
-        std::cout<<"Destroyed LogSteam: "<<this<<" from:"<<std::this_thread::get_id()<<std::endl;
-    };
+
     template <typename T> LogStream& operator << (const T& v)
     {
         if (logLine_==nullptr) logLine_=getLogLine ();

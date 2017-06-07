@@ -10,6 +10,10 @@ add_library(libLog ${SOURCE_FILES})
 ####### Unit Tests ##############
 set (GTEST_ROOT /usr)
 find_package(GTest REQUIRED)
+set(UnitTest_SOURCE_FILES GTest/Main.cpp GTest/LogTests.cpp)
+add_executable(UnitTest ${UnitTest_SOURCE_FILES})
+target_link_libraries(UnitTest GTest::GTest GTest::Main libLog)
+#target_link_libraries(LogThreadApp ${CMAKE_THREAD_LIBS_INIT} libLog)
 
 ######## Test App ################
 add_executable (LogThreadApp TestApps/LogTestApp.cpp)
