@@ -21,6 +21,12 @@ int main ()
     test<<"Hi2"<<LogStream::endl;
     test<<"Hello World "<<123.4<<" see ya"<<LogStream::endl;
 
+    Logger::Instance().logInfo() << "Direct writing";
+    Logger::Instance().logInfo() << " and some more";
+    Logger::Instance().logInfo() << LogStream::endl;
+
+    Logger::Instance().logError() << "An error" << LogStream::endl;
+
     std::thread t (runningFromAnotherThread);
     t.join ();
 

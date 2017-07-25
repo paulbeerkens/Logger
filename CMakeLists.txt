@@ -7,6 +7,15 @@ set(SOURCE_FILES Logger.cpp Logger.h LogStream.cpp LogStream.h LogLine.cpp LogLi
 add_library(libLog ${SOURCE_FILES})
 
 
+file(GLOB HEADERS *.h)
+install(FILES ${HEADERS} DESTINATION ~/source/pkg/include/${PROJECT_NAME})
+install(TARGETS ${PROJECT_NAME} DESTINATION ~/source/pkg/lib)
+
+add_custom_target(install_${PROJECT_NAME}
+        $(MAKE) install
+        DEPENDS ${PROJECT_NAME}
+        COMMENT "Installing ${PROJECT_NAME}")
+
 ####### Unit Tests ##############
 set (GTEST_ROOT /usr)
 find_package(GTest REQUIRED)

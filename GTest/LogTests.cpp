@@ -75,6 +75,45 @@ TEST(MyLogTest, ThreadTest) {
     EXPECT_TRUE(output.find("AB") == std::string::npos);
     EXPECT_TRUE(output.find("BA") == std::string::npos);
 
-    //check that there are 4 separators
+    //check that there are 4 separators per line
     EXPECT_EQ (std::count(output.begin(), output.end(), '|'), 400'000);
+}
+
+TEST(MyLogTest, SeverityTestInfo)
+{
+    testing::internal::CaptureStdout();
+
+    Logger::Instance().logInfo() << "Hello World" << LogStream::endl;
+
+    std::string output = testing::internal::GetCapturedStdout();
+
+    EXPECT_TRUE(output.find("|Info|") != std::string::npos);
+}
+
+TEST(MyLogTest, SeverityTestError)
+{
+    testing::internal::CaptureStdout();
+
+    Logger::Instance().logError() << "Hello World" << LogStream::endl;
+
+    std::string output = testing::internal::GetCapturedStdout();
+
+    EXPECT_TRUE(output.find("|Error|") != std::string::npos);
+}
+
+TEST(MyLogTest, SeverityTestMixed)
+{
+    testing::internal::CaptureStdout();
+
+    Logger::Instance().logInfo() << "Hello World";
+    Logger::Instance().logError() << "Hello World";
+    Logger::Instance().logInfo() << LogStream::endl;
+    Logger::Instance().logError() << LogStream::endl;
+
+    std::string output = testing::internal::GetCapturedStdout();
+
+    EXPECT_TRUE(output.find("|Info|") != std::string::npos);
+    EXPECT_TRUE(output.find("|Error|") != std::string::npos);
+    //check that there are 2 lines
+    EXPECT_EQ (std::count(output.begin(), output.end(), '\n'), 2);
 }
