@@ -26,6 +26,7 @@ int main ()
     Logger::Instance().logInfo() << LogStream::endl;
 
     Logger::Instance().logError() << "An error" << LogStream::endl;
+    Logger::Instance().logWarning() << "A warning" << LogStream::endl;
 
     std::thread t (runningFromAnotherThread);
     t.join ();

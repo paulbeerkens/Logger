@@ -31,6 +31,13 @@ public:
         logStream.setSeverityAndTimeIfRequired(LogSeverity::Error);
         return logStream;
     }
+
+    LogStream &logWarning()
+    {
+        thread_local LogStream logStream;
+        logStream.setSeverityAndTimeIfRequired(LogSeverity::Warning);
+        return logStream;
+    }
 protected:
 
     Logger ();
