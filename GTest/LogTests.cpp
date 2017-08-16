@@ -128,6 +128,30 @@ TEST(MyLogTest, SeverityTestMixed)
     EXPECT_TRUE(output.find("|Info|") != std::string::npos);
     EXPECT_TRUE(output.find("|Warn|") != std::string::npos);
     EXPECT_TRUE(output.find("|Error|") != std::string::npos);
-    //check that there are 2 lines
+    //check that there are 3 lines
     EXPECT_EQ (std::count(output.begin(), output.end(), '\n'), 3);
+}
+
+TEST(MyLogTest, ConstantAndString)
+{
+    testing::internal::CaptureStdout();
+    std::string s("World");
+    Logger::Instance().logInfo() << "Hello " << s << LogStream::endl;
+    std::string output = testing::internal::GetCapturedStdout();
+    EXPECT_TRUE(output.find("|Hello World") != std::string::npos);
+}
+
+TEST(MyLogTest, ConstantAndString2)
+{
+
+    testing::internal::CaptureStdout();
+    Logger::Instance().logInfo() << "First Line" << LogStream::endl;
+
+    std::string s("World");
+    std::string s2(s.c_str(), 6); //test fails when there is a 0 character in the string. Returns only one line.
+    Logger::Instance().logInfo() << "Hello " << s2 << LogStream::endl;
+    std::string output = testing::internal::GetCapturedStdout();
+    EXPECT_TRUE(output.find("|Hello World") != std::string::npos);
+    //check that there are 2 lines
+    EXPECT_EQ (std::count(output.begin(), output.end(), '\n'), 2);
 }

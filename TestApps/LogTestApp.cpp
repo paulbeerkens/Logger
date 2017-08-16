@@ -9,7 +9,7 @@ int runningFromAnotherThread ()
 {
     auto &test2 = Logger::Instance().logInfo();
     test2<<"From another thread";
-    std::this_thread::sleep_for (std::chrono::seconds (2));
+    std::this_thread::sleep_for(std::chrono::seconds(1));
     Logger::Instance().logInfo() << " after the pause" << LogStream::endl;
 };
 
@@ -31,6 +31,11 @@ int main ()
     std::thread t (runningFromAnotherThread);
     t.join ();
 
+
+    std::string s = "Hello";
+    std::string s2(s.c_str(), 5);
+    Logger::Instance().logInfo() << "A string " << s2 << LogStream::endl;
+    std::this_thread::sleep_for(std::chrono::seconds(10));
 
     return 0;
 }
