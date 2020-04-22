@@ -10,7 +10,7 @@ LogPolicy* LogStream::logPolicy_=nullptr;
 
 template <>
 LogStream&
-LogStream::operator << <LogStream::Control> (const LogStream::Control& c)
+LogStream::operator << <LogStream::Control> (const LogStream::Control& )
 {
     assert (logPolicy_!=nullptr);
     logPolicy_->log (logLine_);

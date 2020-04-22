@@ -11,7 +11,8 @@ int runningFromAnotherThread ()
     test2<<"From another thread";
     std::this_thread::sleep_for(std::chrono::seconds(1));
     Logger::Instance().logInfo() << " after the pause" << LogStream::endl;
-};
+    return 0;
+}
 
 
 

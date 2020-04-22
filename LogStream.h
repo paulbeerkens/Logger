@@ -30,7 +30,7 @@ public:
         if (logLine_==nullptr) logLine_=getLogLine ();
         *logLine_<<v;
         return *this;
-    };
+    }
 
     void setSeverityAndTimeIfRequired(LogSeverity s) {
         if (logLine_ == nullptr) logLine_ = getLogLine();

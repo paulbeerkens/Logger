@@ -7,7 +7,7 @@
 void LogLine::reset() {
     ss_.str ("");
     timeSet_ = false;
-};
+}
 
 std::string
 LogLine::asString() const {
@@ -32,5 +32,5 @@ LogLine::asString() const {
     //Then the actual line we are supposed to log
     ss << ss_.str() << std::endl;
     return ss.str();
-};
+}
 

@@ -5,6 +5,6 @@
 #include "LogPolicy.h"
 
 
-void LogPolicy::log (std::unique_ptr<LogLine>& logLine)
+void LogPolicy::log (std::unique_ptr<LogLine>& /*logLine*/)
 {
-};
+}
