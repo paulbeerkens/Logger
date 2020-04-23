@@ -1,9 +1,10 @@
 //
 // Created by pbeerken on 6/6/17.
 //
-#include "../Logger.h"
+#include <Logger/Logger.h>
 #include <thread>
 #include <chrono>
+#include <Logger/LogMacros.h>
 
 int runningFromAnotherThread ()
 {
@@ -18,6 +19,9 @@ int runningFromAnotherThread ()
 
 int main ()
 {
+    int i=123;
+    LOGINFO("test: "<<i);
+
     auto &test = Logger::Instance().logInfo();
     test<<"Hi2"<<LogStream::endl;
     test<<"Hello World "<<123.4<<" see ya"<<LogStream::endl;

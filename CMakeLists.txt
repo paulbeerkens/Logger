@@ -6,22 +6,41 @@ set(CMAKE_STATIC_LIBRARY_PREFIX "")
 
 set(CMAKE_CXX_STANDARD 14)
 
-set(SOURCE_FILES Logger.cpp Logger.h LogStream.cpp LogStream.h LogLine.cpp LogLine.h LogPolicy.cpp LogPolicy.h LogDirectCoutPolicy.cpp LogDirectCoutPolicy.h LogSeverity.h LogSeverity.cpp)
-add_library(libLog ${SOURCE_FILES})
+set(HEADER_FILES
+        LogDirectCoutPolicy.h
+        Logger.h
+        LogMacros.h
+        LogStream.h
+        LogLine.h
+        LogPolicy.h
+        LogSeverity.h
+        )
+
+set(SOURCE_FILES
+        LogDirectCoutPolicy.cpp
+        Logger.cpp
+        LogStream.cpp
+        LogLine.cpp
+        LogPolicy.cpp
+        LogSeverity.cpp)
 
 
-file(GLOB HEADERS *.h)
-install(FILES ${HEADERS} DESTINATION ~/source/pkg/include/${PROJECT_NAME})
-install(TARGETS ${PROJECT_NAME} DESTINATION ~/source/pkg/lib)
+add_library(libLog STATIC ${SOURCE_FILES})
 
-add_custom_target(install_${PROJECT_NAME}
-        $(MAKE) install
-        DEPENDS ${PROJECT_NAME}
-        COMMENT "Installing ${PROJECT_NAME}")
+
+target_include_directories (libLog INTERFACE ../.) #Allow to include this to be included with the directory eg #include <Logger/Logger.H>
+
+#file(GLOB HEADERS *.h)
+#install(FILES ${HEADERS} DESTINATION ~/source/pkg/include/${PROJECT_NAME})
+#install(TARGETS ${PROJECT_NAME} DESTINATION ~/source/pkg/lib)
+
+#add_custom_target(install_${PROJECT_NAME}
+#        $(MAKE) install
+#        DEPENDS ${PROJECT_NAME}
+#        COMMENT "Installing ${PROJECT_NAME}")
 
 ####### Unit Tests ##############
 add_subdirectory(GTest)
-
 
 ######## Test App ################
 add_subdirectory(TestApps)
